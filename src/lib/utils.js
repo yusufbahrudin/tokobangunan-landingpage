@@ -21,10 +21,12 @@ export const getDiscountPercent = (price, promoPrice) => {
   return Math.round(((price - promoPrice) / price) * 100)
 }
 
+const API_BASE = import.meta.env.VITE_API_URL || 'https://tokobangunan-be-production.up.railway.app'
+
 export const getImageUrl = (path) => {
   if (!path) return `https://placehold.co/400x400/f3f4f6/9ca3af?text=No+Image`
   if (path.startsWith('http')) return path
-  return `${import.meta.env.VITE_API_URL}${path}`
+  return `${API_BASE}${path}`
 }
 
 export const truncate = (str, n = 60) => {
