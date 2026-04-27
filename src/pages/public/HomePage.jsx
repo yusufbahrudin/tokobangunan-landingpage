@@ -287,9 +287,6 @@ export default function HomePage() {
             <Link to="/products" className="bg-primary-600 hover:bg-primary-700 text-white font-bold px-7 py-3 rounded-full transition-colors inline-flex items-center gap-2">
               Mulai Belanja <ArrowRight size={16} />
             </Link>
-            <Link to="/login" className="border border-gray-600 hover:border-gray-400 text-gray-300 hover:text-white font-semibold px-7 py-3 rounded-full transition-colors">
-              Daftar Sekarang
-            </Link>
           </div>
         </div>
       </section>

@@ -60,8 +60,8 @@ export default function LoginPage() {
                 <div className="text-primary-600 text-xs font-semibold">Toko Bahan Bangunan</div>
               </div>
             </Link>
-            <h1 className="text-xl font-extrabold text-gray-900 mt-4">Masuk ke Akun</h1>
-            <p className="text-sm text-gray-500 mt-1">Login sebagai admin untuk mengelola toko</p>
+            <h1 className="text-xl font-extrabold text-gray-900 mt-4">Masuk</h1>
+            {/* <p className="text-sm text-gray-500 mt-1">Login sebagai admin untuk mengelola toko</p> */}
           </div>
 
           {/* Error */}
@@ -124,7 +124,7 @@ export default function LoginPage() {
             </button>
           </form>
 
-          <div className="mt-6 pt-5 border-t border-gray-100 text-center">
+          {/* <div className="mt-6 pt-5 border-t border-gray-100 text-center">
             <p className="text-sm text-gray-500">
               Belum punya akun?{' '}
               <Link to="/register" className="text-primary-600 font-semibold hover:underline">
@@ -134,15 +134,15 @@ export default function LoginPage() {
             <Link to="/" className="text-sm text-gray-400 hover:text-gray-600 block mt-2">
               ← Kembali ke Beranda
             </Link>
-          </div>
+          </div> */}
         </div>
 
         {/* Demo hint */}
-        <div className="mt-4 bg-amber-50 border border-amber-200 rounded-xl p-4 text-center text-xs text-amber-700">
+        {/* <div className="mt-4 bg-amber-50 border border-amber-200 rounded-xl p-4 text-center text-xs text-amber-700">
           <p className="font-semibold mb-1">Demo Admin Credentials</p>
           <p>Email: <code className="bg-amber-100 px-1 rounded">admin@galaganrizal.com</code></p>
           <p className="mt-0.5">Password: <code className="bg-amber-100 px-1 rounded">Admin123!</code></p>
-        </div>
+        </div> */}
       </div>
     </div>
   )
