@@ -24,8 +24,8 @@ const HERO_SLIDES = [
     subtitle: 'Dapatkan penawaran terbaik untuk semen, cat, keramik, dan masih banyak lagi. Stok terbatas!',
     cta: 'Lihat Promo',
     ctaLink: '/products?is_featured=true',
-    bg: 'from-orange-700 to-red-800',
-    accent: 'bg-orange-600',
+    bg: 'from-blue-700 to-blue-900',
+    accent: 'bg-blue-600',
   },
 ]
 
@@ -214,7 +214,7 @@ export default function HomePage() {
       </section>
 
       {/* Promo Banner */}
-      <section className="bg-gradient-to-r from-red-600 to-orange-500 py-8 my-4">
+      <section className="bg-gradient-to-r from-blue-600 to-blue-500 py-8 my-4">
         <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="text-white">
             <div className="flex items-center gap-2 mb-1">

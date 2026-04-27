@@ -162,12 +162,12 @@ export default function AdminDashboard() {
                 </div>
                 <ArrowUpRight size={14} className="text-purple-400" />
               </Link>
-              <Link to="/admin/users" className="flex items-center justify-between p-3 bg-orange-50 hover:bg-orange-100 rounded-xl transition-colors group">
+              <Link to="/admin/users" className="flex items-center justify-between p-3 bg-blue-50 hover:bg-blue-100 rounded-xl transition-colors group">
                 <div className="flex items-center gap-2.5">
-                  <Users size={15} className="text-orange-600" />
-                  <span className="text-sm font-semibold text-orange-700">Kelola Pengguna</span>
+                  <Users size={15} className="text-blue-600" />
+                  <span className="text-sm font-semibold text-blue-700">Kelola Pengguna</span>
                 </div>
-                <ArrowUpRight size={14} className="text-orange-400" />
+                <ArrowUpRight size={14} className="text-blue-400" />
               </Link>
             </div>
           </div>
