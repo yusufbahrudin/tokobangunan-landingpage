@@ -30,10 +30,10 @@ const HERO_SLIDES = [
 ]
 
 const FEATURES = [
-  { icon: Truck, title: 'Gratis Ongkir', desc: 'Min. pembelian Rp 500.000' },
+  { icon: Truck, title: 'Gratis Ongkir Wilayah Surabaya', desc: 'Min. pembelian Rp 500.000' },
   { icon: Shield, title: 'Produk Original', desc: 'Garansi 100% asli' },
-  { icon: Zap, title: 'Pengiriman Cepat', desc: 'Proses 1-2 hari kerja' },
-  { icon: HeadphonesIcon, title: 'CS 24 Jam', desc: 'Siap membantu Anda' },
+  { icon: Zap, title: 'Pengiriman Cepat', desc: 'Proses 1 hari kerja' },
+  // { icon: HeadphonesIcon, title: 'CS 24 Jam', desc: 'Siap membantu Anda' },
 ]
 
 export default function HomePage() {
@@ -79,7 +79,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 py-16 md:py-24">
           <div className="max-w-2xl">
             <span className={`inline-block ${slide.accent} text-white text-xs font-bold px-3 py-1 rounded-full mb-4 uppercase tracking-wider`}>
-              Galangan Rizal
+              TB. CAHAYA ALAM
             </span>
             <h1 className="text-3xl md:text-5xl font-extrabold leading-tight mb-4 whitespace-pre-line">
               {slide.title}

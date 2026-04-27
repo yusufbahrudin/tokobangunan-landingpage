@@ -50,7 +50,7 @@ export default function Navbar() {
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1"><MapPin size={11} /> Tersedia di seluruh Indonesia</span>
           </div>
-          <span className="font-medium">Gratis Ongkir untuk pembelian minimal Rp 500.000</span>
+          <span className="font-medium">Gratis Ongkir untuk pembelian minimal Rp 500.000 (Wilayah Surabaya)</span>
         </div>
       </div>
 
@@ -64,8 +64,7 @@ export default function Navbar() {
                 <ShoppingBag size={20} className="text-white" />
               </div>
               <div className="hidden sm:block">
-                <div className="font-extrabold text-gray-900 leading-none text-[17px]">Galangan</div>
-                <div className="text-primary-600 text-[11px] font-semibold leading-none">Rizal</div>
+                <div className="font-extrabold text-gray-900 leading-none text-[17px]">TB. CAHAYA ALAM</div>
               </div>
             </Link>
 

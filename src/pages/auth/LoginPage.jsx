@@ -56,7 +56,7 @@ export default function LoginPage() {
                 <ShoppingBag size={24} className="text-white" />
               </div>
               <div>
-                <div className="font-extrabold text-xl text-gray-900 leading-none">Galangan Rizal</div>
+                <div className="font-extrabold text-xl text-gray-900 leading-none">TB. CAHAYA ALAM</div>
                 <div className="text-primary-600 text-xs font-semibold">Toko Bahan Bangunan</div>
               </div>
             </Link>

@@ -69,7 +69,7 @@ export default function AdminDashboard() {
     <div>
       <div className="mb-6">
         <h1 className="text-2xl font-extrabold text-gray-900">Dashboard</h1>
-        <p className="text-sm text-gray-500 mt-0.5">Selamat datang di panel admin Galangan Rizal</p>
+        <p className="text-sm text-gray-500 mt-0.5">Selamat datang di panel admin TB. CAHAYA ALAM</p>
       </div>
 
       {/* Stats */}

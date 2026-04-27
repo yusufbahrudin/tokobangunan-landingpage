@@ -165,12 +165,10 @@ export default function ProductDetailPage() {
                   <span className="text-3xl font-extrabold text-primary-700">{formatCurrency(product.promo_price)}</span>
                   <span className="bg-red-100 text-red-600 text-sm font-bold px-2 py-0.5 rounded-full">-{discount}%</span>
                 </div>
-                <p className="text-xs text-gray-500 mt-1">per {product.unit || 'pcs'}</p>
               </div>
             ) : (
               <div>
                 <span className="text-3xl font-extrabold text-gray-900">{formatCurrency(product.price)}</span>
-                <p className="text-xs text-gray-500 mt-1">per {product.unit || 'pcs'}</p>
               </div>
             )}
           </div>
@@ -180,7 +178,7 @@ export default function ProductDetailPage() {
             <div className="bg-gray-50 rounded-xl p-3">
               <p className="text-xs text-gray-500 mb-0.5">Stok</p>
               <p className={`font-bold text-sm ${product.stock > 0 ? 'text-green-600' : 'text-red-500'}`}>
-                {product.stock > 0 ? `${product.stock} ${product.unit || 'pcs'}` : 'Stok Habis'}
+                {product.stock > 0 ? `${product.stock}` : 'Stok Habis'}
               </p>
             </div>
             {product.brand && (
@@ -241,17 +239,14 @@ export default function ProductDetailPage() {
                   `Halo, saya ingin memesan produk berikut:`,
                   ``,
                   `*${product.name}*`,
-                  product.sku ? `SKU: ${product.sku}` : null,
-                  product.category ? `Kategori: ${product.category.name}` : null,
                   product.brand ? `Brand: ${product.brand.name}` : null,
-                  `Harga: ${harga} / ${product.unit || 'pcs'}`,
-                  product.stock > 0 ? `Stok tersedia: ${product.stock} ${product.unit || 'pcs'}` : `⚠️ Stok habis`,
+                  `Harga: ${harga}`,
                   ``,
                   `Link produk: ${window.location.href}`,
                   ``,
                   `Mohon konfirmasi ketersediaan dan informasi pengiriman. Terima kasih!`,
                 ].filter(Boolean).join('\n')
-                return `https://wa.me/6281230707932?text=${encodeURIComponent(msg)}`
+                return `https://wa.me/6285730498975?text=${encodeURIComponent(msg)}`
               })()}
               target="_blank"
               rel="noopener noreferrer"

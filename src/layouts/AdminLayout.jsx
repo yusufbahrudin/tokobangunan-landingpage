@@ -74,7 +74,7 @@ export default function AdminLayout() {
           </div>
           {sidebarOpen && (
             <div className="min-w-0">
-              <div className="font-extrabold text-sm text-gray-900 truncate">Galangan Rizal</div>
+              <div className="font-extrabold text-sm text-gray-900 truncate">TB. CAHAYA ALAM</div>
               <div className="text-[10px] text-primary-600 font-semibold">Admin Panel</div>
             </div>
           )}
@@ -113,7 +113,7 @@ export default function AdminLayout() {
             <ShoppingBag size={16} className="text-white" />
           </div>
           <div>
-            <div className="font-extrabold text-sm text-gray-900">Galangan Rizal</div>
+            <div className="font-extrabold text-sm text-gray-900">Tb. CAHAYA ALAM</div>
             <div className="text-[10px] text-primary-600 font-semibold">Admin Panel</div>
           </div>
           <button onClick={() => setMobileSidebar(false)} className="ml-auto text-gray-400">
