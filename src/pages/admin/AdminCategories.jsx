@@ -140,9 +140,24 @@ export default function AdminCategories() {
                 </td>
               </tr>
             )) : (
-              <tr><td colSpan={5} className="px-4 py-16 text-center text-gray-400">
-                <Tag size={40} className="mx-auto mb-3 opacity-30" />
-                <p>Belum ada kategori</p>
+              <tr><td colSpan={5} className="px-4 py-16 text-center">
+                <div className="flex flex-col items-center gap-2">
+                  <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-1">
+                    <Tag size={32} className="text-gray-300" />
+                  </div>
+                  {search ? (
+                    <>
+                      <p className="font-semibold text-gray-700">Kategori tidak ditemukan</p>
+                      <p className="text-sm text-gray-400">Tidak ada kategori yang cocok dengan <span className="font-medium text-gray-500">"{search}"</span></p>
+                      <button onClick={() => setSearch('')} className="mt-2 btn-secondary text-xs py-1.5 px-4">Hapus Pencarian</button>
+                    </>
+                  ) : (
+                    <>
+                      <p className="font-semibold text-gray-700">Belum ada kategori</p>
+                      <p className="text-sm text-gray-400">Tambahkan kategori pertama Anda</p>
+                    </>
+                  )}
+                </div>
               </td></tr>
             )}
           </tbody>

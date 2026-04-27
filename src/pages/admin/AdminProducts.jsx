@@ -122,6 +122,18 @@ export default function AdminProducts() {
     setForm((f) => ({ ...f, [key]: val }))
   }
 
+  const formatRupiahInput = (val) => {
+    if (val === '' || val === null || val === undefined) return ''
+    const num = parseInt(String(val).replace(/\D/g, ''), 10)
+    if (isNaN(num)) return ''
+    return num.toLocaleString('id-ID')
+  }
+
+  const fcPrice = (key) => (e) => {
+    const raw = String(e.target.value).replace(/\D/g, '')
+    setForm((f) => ({ ...f, [key]: raw }))
+  }
+
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
@@ -216,9 +228,24 @@ export default function AdminProducts() {
                   </td>
                 </tr>
               )) : (
-                <tr><td colSpan={6} className="px-4 py-16 text-center text-gray-400">
-                  <Package size={40} className="mx-auto mb-3 opacity-30" />
-                  <p>Belum ada produk</p>
+                <tr><td colSpan={6} className="px-4 py-16 text-center">
+                  <div className="flex flex-col items-center gap-2">
+                    <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-1">
+                      <Package size={32} className="text-gray-300" />
+                    </div>
+                    {search ? (
+                      <>
+                        <p className="font-semibold text-gray-700">Produk tidak ditemukan</p>
+                        <p className="text-sm text-gray-400">Tidak ada produk yang cocok dengan <span className="font-medium text-gray-500">"{search}"</span></p>
+                        <button onClick={() => { setSearch(''); setPage(1) }} className="mt-2 btn-secondary text-xs py-1.5 px-4">Hapus Pencarian</button>
+                      </>
+                    ) : (
+                      <>
+                        <p className="font-semibold text-gray-700">Belum ada produk</p>
+                        <p className="text-sm text-gray-400">Tambahkan produk pertama Anda</p>
+                      </>
+                    )}
+                  </div>
                 </td></tr>
               )}
             </tbody>
@@ -263,11 +290,17 @@ export default function AdminProducts() {
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-1">Harga Normal *</label>
-                  <input type="number" value={form.price} onChange={fc('price')} className="input" placeholder="85000" required />
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-gray-500 pointer-events-none">Rp</span>
+                    <input type="text" inputMode="numeric" value={formatRupiahInput(form.price)} onChange={fcPrice('price')} className="input pl-9" placeholder="85.000" required />
+                  </div>
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-1">Harga Promo</label>
-                  <input type="number" value={form.promo_price} onChange={fc('promo_price')} className="input" placeholder="75000" />
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-gray-500 pointer-events-none">Rp</span>
+                    <input type="text" inputMode="numeric" value={formatRupiahInput(form.promo_price)} onChange={fcPrice('promo_price')} className="input pl-9" placeholder="75.000" />
+                  </div>
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-1">Stok *</label>

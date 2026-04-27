@@ -161,9 +161,26 @@ export default function AdminUsers() {
                   </td>
                 </tr>
               )) : (
-                <tr><td colSpan={6} className="px-4 py-16 text-center text-gray-400">
-                  <Users size={40} className="mx-auto mb-3 opacity-30" />
-                  <p>Belum ada pengguna</p>
+                <tr><td colSpan={6} className="px-4 py-16 text-center">
+                  <div className="flex flex-col items-center gap-2">
+                    <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-1">
+                      <Users size={32} className="text-gray-300" />
+                    </div>
+                    {search || role ? (
+                      <>
+                        <p className="font-semibold text-gray-700">Pengguna tidak ditemukan</p>
+                        <p className="text-sm text-gray-400">
+                          {search ? <>Tidak ada pengguna yang cocok dengan <span className="font-medium text-gray-500">"{search}"</span></> : 'Tidak ada pengguna dengan filter yang dipilih'}
+                        </p>
+                        <button onClick={() => { setSearch(''); setRole(''); setPage(1) }} className="mt-2 btn-secondary text-xs py-1.5 px-4">Hapus Filter</button>
+                      </>
+                    ) : (
+                      <>
+                        <p className="font-semibold text-gray-700">Belum ada pengguna</p>
+                        <p className="text-sm text-gray-400">Pengguna yang mendaftar akan muncul di sini</p>
+                      </>
+                    )}
+                  </div>
                 </td></tr>
               )}
             </tbody>

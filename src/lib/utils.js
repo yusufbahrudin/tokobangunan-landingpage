@@ -24,7 +24,7 @@ export const getDiscountPercent = (price, promoPrice) => {
 export const getImageUrl = (path) => {
   if (!path) return `https://placehold.co/400x400/f3f4f6/9ca3af?text=No+Image`
   if (path.startsWith('http')) return path
-  return `http://localhost:3000${path}`
+  return `${import.meta.env.VITE_API_URL}${path}`
 }
 
 export const truncate = (str, n = 60) => {

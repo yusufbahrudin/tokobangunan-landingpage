@@ -13,6 +13,29 @@ export default function ProductDetailPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [imgIdx, setImgIdx] = useState(0)
+  const [copied, setCopied] = useState(false)
+
+  const handleShare = async () => {
+    const url = window.location.href
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: product?.name, url })
+        return
+      } catch {}
+    }
+    try {
+      await navigator.clipboard.writeText(url)
+    } catch {
+      const el = document.createElement('textarea')
+      el.value = url
+      document.body.appendChild(el)
+      el.select()
+      document.execCommand('copy')
+      document.body.removeChild(el)
+    }
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
 
   useEffect(() => {
     setLoading(true)
@@ -132,16 +155,6 @@ export default function ProductDetailPage() {
             {product.name}
           </h1>
 
-          {/* Rating */}
-          <div className="flex items-center gap-3 mb-4">
-            <div className="flex items-center gap-1">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} size={14} className={i < Math.round(product.rating || 5) ? 'text-amber-400 fill-amber-400' : 'text-gray-200 fill-gray-200'} />
-              ))}
-            </div>
-            <span className="text-sm text-gray-500">{product.sold_count || 0} terjual</span>
-            {product.sku && <span className="text-xs text-gray-400">SKU: {product.sku}</span>}
-          </div>
 
           {/* Price */}
           <div className="bg-primary-50 rounded-xl p-4 mb-5">
@@ -242,15 +255,16 @@ export default function ProductDetailPage() {
               })()}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary flex-1 justify-center"
+              className="btn-primary flex-1 justify-center !bg-green-600 hover:!bg-green-700"
             >
               <MessageCircle size={16} /> Pesan Sekarang
             </a>
             <button
-              onClick={() => navigator.clipboard?.writeText(window.location.href)}
-              className="btn-secondary px-4"
+              onClick={handleShare}
+              className="btn-secondary px-4 min-w-[44px]"
+              title="Bagikan"
             >
-              <Share2 size={16} />
+              {copied ? <span className="text-xs font-medium text-green-600">Tersalin!</span> : <Share2 size={16} />}
             </button>
           </div>
         </div>

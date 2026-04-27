@@ -54,14 +54,7 @@ export default function ProductCard({ product }) {
             <span className="text-base font-bold text-gray-900">{formatCurrency(product.price)}</span>
           )}
 
-          <div className="flex items-center justify-between mt-2">
-            <div className="flex items-center gap-1 text-xs text-gray-500">
-              <Star size={11} className="text-amber-400 fill-amber-400" />
-              <span>{product.rating || '5.0'}</span>
-              <span>· {product.sold_count || 0} terjual</span>
-            </div>
-            <span className="text-[10px] text-gray-400">{product.unit || 'pcs'}</span>
-          </div>
+        
         </div>
       </div>
     </Link>
