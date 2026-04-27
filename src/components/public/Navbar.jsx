@@ -48,7 +48,7 @@ export default function Navbar() {
       <div className="bg-primary-700 text-white text-xs py-1.5 hidden md:block">
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <span className="flex items-center gap-1"><MapPin size={11} /> Tersedia di seluruh Indonesia</span>
+            <span className="flex items-center gap-1"><MapPin size={11} /> Surabaya </span>
           </div>
           <span className="font-medium">Gratis Ongkir untuk pembelian minimal Rp 500.000 (Wilayah Surabaya)</span>
         </div>
