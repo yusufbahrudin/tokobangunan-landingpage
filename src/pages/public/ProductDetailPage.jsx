@@ -157,7 +157,7 @@ export default function ProductDetailPage() {
 
 
           {/* Price */}
-          <div className="bg-primary-50 rounded-xl p-4 mb-5">
+          <div className="mb-4">
             {product.promo_price && product.promo_price < product.price ? (
               <div>
                 <span className="text-sm text-gray-400 line-through">{formatCurrency(product.price)}</span>
@@ -173,27 +173,28 @@ export default function ProductDetailPage() {
             )}
           </div>
 
-          {/* Stock & brand */}
-          <div className="grid grid-cols-2 gap-3 mb-5">
-            <div className="bg-gray-50 rounded-xl p-3">
-              <p className="text-xs text-gray-500 mb-0.5">Stok</p>
-              <p className={`font-bold text-sm ${product.stock > 0 ? 'text-green-600' : 'text-red-500'}`}>
-                {product.stock > 0 ? `${product.stock}` : 'Stok Habis'}
-              </p>
+          {/* Brand */}
+          {product.brand && (
+            <div className="flex items-center gap-2 mb-4 text-sm text-gray-600">
+              <span className="text-gray-400">Brand:</span>
+              <span className="font-semibold text-gray-800">{product.brand.name}</span>
             </div>
-            {product.brand && (
-              <div className="bg-gray-50 rounded-xl p-3">
-                <p className="text-xs text-gray-500 mb-0.5">Brand</p>
-                <p className="font-bold text-sm text-gray-800">{product.brand.name}</p>
-              </div>
-            )}
-          </div>
+          )}
 
           {/* Description */}
           {product.description && (
             <div className="mb-5">
               <h3 className="font-bold text-gray-900 mb-2">Deskripsi Produk</h3>
-              <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-line">{product.description}</p>
+              <div className="relative">
+                <div
+                  className="max-h-44 overflow-y-auto rounded-xl bg-gray-50 border border-gray-100 p-4 text-sm text-gray-600 leading-relaxed whitespace-pre-line"
+                  style={{ scrollbarWidth: 'thin', scrollbarColor: '#d1d5db #f9fafb' }}
+                >
+                  {product.description}
+                </div>
+                {/* Gradient fade hint */}
+                <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-8 rounded-b-xl bg-gradient-to-t from-gray-50 to-transparent" />
+              </div>
             </div>
           )}
 

@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { productsAPI, categoriesAPI, brandsAPI } from '../../lib/api'
 import { formatCurrency, getImageUrl } from '../../lib/utils'
 import {
@@ -28,7 +28,23 @@ export default function AdminProducts() {
   const [categories, setCategories] = useState([])
   const [brands, setBrands] = useState([])
   const [imageFiles, setImageFiles] = useState([])
+  const [imagePreviews, setImagePreviews] = useState([])
   const [deleteConfirm, setDeleteConfirm] = useState(null)
+  const fileInputRef = useRef(null)
+
+  useEffect(() => {
+    const urls = imageFiles.map((f) => URL.createObjectURL(f))
+    setImagePreviews(urls)
+    return () => urls.forEach((u) => URL.revokeObjectURL(u))
+  }, [imageFiles])
+
+  const addImages = (files) => {
+    setImageFiles((prev) => [...prev, ...Array.from(files)])
+  }
+
+  const removeImage = (index) => {
+    setImageFiles((prev) => prev.filter((_, i) => i !== index))
+  }
 
   const fetchProducts = useCallback(async () => {
     setLoading(true)
@@ -54,6 +70,7 @@ export default function AdminProducts() {
     setEditProduct(null)
     setForm(EMPTY_FORM)
     setImageFiles([])
+    setImagePreviews([])
     setModalOpen(true)
   }
 
@@ -77,6 +94,7 @@ export default function AdminProducts() {
       brand_id: product.brand?.id || '',
     })
     setImageFiles([])
+    setImagePreviews([])
     setModalOpen(true)
   }
 
@@ -337,15 +355,67 @@ export default function AdminProducts() {
                   <textarea value={form.description} onChange={fc('description')} className="input resize-none" rows={3} placeholder="Deskripsi produk..." />
                 </div>
                 <div className="sm:col-span-2">
-                  <label className="block text-sm font-semibold text-gray-700 mb-1">Gambar Produk</label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Gambar Produk</label>
+
+                  {/* Existing images when editing */}
+                  {editProduct?.images?.length > 0 && imagePreviews.length === 0 && (
+                    <div className="mb-3">
+                      <p className="text-xs text-gray-400 mb-2">Foto saat ini (pilih foto baru untuk mengganti)</p>
+                      <div className="flex flex-wrap gap-2">
+                        {editProduct.images.map((img, i) => (
+                          <div key={i} className="relative w-20 h-20 rounded-xl overflow-hidden border border-gray-200 bg-gray-50">
+                            <img
+                              src={getImageUrl(img)}
+                              alt=""
+                              className="w-full h-full object-cover"
+                              onError={(e) => { e.target.src = 'https://placehold.co/80x80/f3f4f6/9ca3af?text=?' }}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* New image preview grid */}
+                  <div className="flex flex-wrap gap-2">
+                    {imagePreviews.map((url, i) => (
+                      <div key={i} className="relative w-20 h-20 rounded-xl overflow-hidden border border-gray-200 bg-gray-50 group">
+                        <img src={url} alt="" className="w-full h-full object-cover" />
+                        {i === 0 && (
+                          <span className="absolute bottom-0 left-0 right-0 text-[9px] text-center bg-primary-600 text-white py-0.5 font-semibold">Utama</span>
+                        )}
+                        <button
+                          type="button"
+                          onClick={() => removeImage(i)}
+                          className="absolute top-1 right-1 w-5 h-5 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                        >
+                          <X size={10} />
+                        </button>
+                      </div>
+                    ))}
+
+                    {/* Add photo button */}
+                    <button
+                      type="button"
+                      onClick={() => fileInputRef.current?.click()}
+                      className="w-20 h-20 rounded-xl border-2 border-dashed border-gray-300 hover:border-primary-400 hover:bg-primary-50 transition-colors flex flex-col items-center justify-center gap-1 text-gray-400 hover:text-primary-500"
+                    >
+                      <Plus size={18} />
+                      <span className="text-[10px] font-medium">Tambah</span>
+                    </button>
+                  </div>
+
                   <input
+                    ref={fileInputRef}
                     type="file"
                     accept="image/*"
                     multiple
-                    onChange={(e) => setImageFiles(Array.from(e.target.files))}
-                    className="input text-sm"
+                    className="hidden"
+                    onChange={(e) => addImages(e.target.files)}
                   />
-                  {imageFiles.length > 0 && <p className="text-xs text-gray-500 mt-1">{imageFiles.length} file dipilih</p>}
+                  {imagePreviews.length > 0 && (
+                    <p className="text-xs text-gray-400 mt-2">{imagePreviews.length} foto dipilih · Hover foto untuk hapus · Foto pertama jadi foto utama</p>
+                  )}
                 </div>
                 <div className="sm:col-span-2 flex gap-6">
                   <label className="flex items-center gap-2 cursor-pointer">
