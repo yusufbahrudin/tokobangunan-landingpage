@@ -4,7 +4,7 @@ import { useAuth } from '../contexts/AuthContext'
 import {
   LayoutDashboard, Package, Tag, Bookmark, Users,
   Menu, X, ShoppingBag, LogOut, ChevronDown,
-  Bell, Settings, ExternalLink,
+  Settings, ExternalLink,
 } from 'lucide-react'
 import toast from 'react-hot-toast'
 
@@ -13,7 +13,6 @@ const NAV_ITEMS = [
   { to: '/admin/products', icon: Package, label: 'Produk' },
   { to: '/admin/categories', icon: Tag, label: 'Kategori' },
   { to: '/admin/brands', icon: Bookmark, label: 'Brand' },
-  { to: '/admin/users', icon: Users, label: 'Pengguna' },
 ]
 
 export default function AdminLayout() {
@@ -21,6 +20,7 @@ export default function AdminLayout() {
   const navigate = useNavigate()
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const [mobileSidebar, setMobileSidebar] = useState(false)
+  const [userMenuOpen, setUserMenuOpen] = useState(false)
 
   const handleLogout = async () => {
     await logout()
@@ -137,25 +137,38 @@ export default function AdminLayout() {
           <div className="flex-1" />
 
           <div className="flex items-center gap-2">
-            <button className="relative p-2 rounded-xl text-gray-500 hover:bg-gray-100">
-              <Bell size={18} />
-            </button>
-
-            <div className="flex items-center gap-2.5 pl-3 border-l border-gray-200">
-              <div className="w-8 h-8 bg-primary-600 rounded-full flex items-center justify-center text-white text-xs font-bold">
-                {user?.name?.[0]?.toUpperCase() || 'A'}
-              </div>
-              <div className="hidden md:block">
-                <p className="text-sm font-semibold text-gray-900 leading-none">{user?.name}</p>
-                <p className="text-xs text-primary-600 capitalize">{user?.role}</p>
-              </div>
+            <div className="relative flex items-center gap-2.5 pl-3 border-l border-gray-200">
               <button
-                onClick={handleLogout}
-                className="ml-1 p-2 rounded-xl text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors"
-                title="Keluar"
+                onClick={() => setUserMenuOpen(!userMenuOpen)}
+                className="flex items-center gap-2.5 rounded-xl hover:bg-gray-100 px-2 py-1.5 transition-colors"
               >
-                <LogOut size={16} />
+                <div className="w-8 h-8 bg-primary-600 rounded-full flex items-center justify-center text-white text-xs font-bold">
+                  {user?.name?.[0]?.toUpperCase() || 'A'}
+                </div>
+                <div className="hidden md:block text-left">
+                  <p className="text-sm font-semibold text-gray-900 leading-none">{user?.name}</p>
+                  <p className="text-xs text-primary-600 capitalize">{user?.role}</p>
+                </div>
+                <ChevronDown size={14} className={`text-gray-400 transition-transform ${userMenuOpen ? 'rotate-180' : ''}`} />
               </button>
+
+              {userMenuOpen && (
+                <>
+                  <div className="fixed inset-0 z-40" onClick={() => setUserMenuOpen(false)} />
+                  <div className="absolute right-0 top-full mt-2 w-52 bg-white rounded-xl shadow-xl border border-gray-100 py-1.5 z-50">
+                    <div className="px-4 py-2.5 border-b border-gray-100">
+                      <p className="font-semibold text-sm text-gray-900">{user?.name}</p>
+                      <p className="text-xs text-gray-500">{user?.email}</p>
+                    </div>
+                    <button
+                      onClick={() => { setUserMenuOpen(false); handleLogout() }}
+                      className="flex items-center gap-2.5 w-full px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors"
+                    >
+                      <LogOut size={15} /> Keluar
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </header>
