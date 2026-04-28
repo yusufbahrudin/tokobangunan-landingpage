@@ -5,7 +5,7 @@ const FOOTER_LINKS = {
   'Belanja': [
     { label: 'Semua Produk', to: '/products' },
     { label: 'Produk Unggulan', to: '/products?is_featured=true' },
-    { label: 'Produk Promo', to: '/products/promo' },
+    { label: 'Produk Promo', to: '/products?has_promo=true' },
   ],
   // 'Bantuan': [
   //   { label: 'Cara Berbelanja', to: '/help' },

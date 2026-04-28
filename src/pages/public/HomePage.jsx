@@ -23,7 +23,7 @@ const HERO_SLIDES = [
     title: 'Promo Spesial\nHingga 50% Off',
     subtitle: 'Dapatkan penawaran terbaik untuk semen, cat, keramik, dan masih banyak lagi. Stok terbatas!',
     cta: 'Lihat Promo',
-    ctaLink: '/products?is_featured=true',
+    ctaLink: '/products?has_promo=true',
     bg: 'from-blue-700 to-blue-900',
     accent: 'bg-blue-600',
   },
@@ -88,9 +88,11 @@ export default function HomePage() {
               {slide.subtitle}
             </p>
             <div className="flex items-center gap-3">
-              <Link to={slide.ctaLink} className="bg-white text-primary-700 font-bold px-6 py-3 rounded-full hover:bg-primary-50 transition-colors inline-flex items-center gap-2 shadow-lg">
-                {slide.cta} <ArrowRight size={16} />
-              </Link>
+              {!(slide.id === 2 && promoProducts.length === 0) && (
+                <Link to={slide.ctaLink} className="bg-white text-primary-700 font-bold px-6 py-3 rounded-full hover:bg-primary-50 transition-colors inline-flex items-center gap-2 shadow-lg">
+                  {slide.cta} <ArrowRight size={16} />
+                </Link>
+              )}
               <Link to="/products" className="border border-white/40 text-white font-semibold px-6 py-3 rounded-full hover:bg-white/10 transition-colors">
                 Lihat Katalog
               </Link>
@@ -213,25 +215,27 @@ export default function HomePage() {
         )}
       </section>
 
-      {/* Promo Banner */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-500 py-8 my-4">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="text-white">
-            <div className="flex items-center gap-2 mb-1">
-              <Tag size={18} />
-              <span className="text-sm font-bold uppercase tracking-wider">Penawaran Terbatas</span>
+      {/* Promo Banner - hanya tampil jika ada produk promo */}
+      {!loading && promoProducts.length > 0 && (
+        <section className="bg-gradient-to-r from-blue-600 to-blue-500 py-8 my-4">
+          <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="text-white">
+              <div className="flex items-center gap-2 mb-1">
+                <Tag size={18} />
+                <span className="text-sm font-bold uppercase tracking-wider">Penawaran Terbatas</span>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-extrabold">Flash Sale Hari Ini!</h2>
+              <p className="text-white/80 text-sm mt-1">Diskon hingga 50% untuk produk pilihan. Jangan sampai kehabisan!</p>
             </div>
-            <h2 className="text-2xl md:text-3xl font-extrabold">Flash Sale Hari Ini!</h2>
-            <p className="text-white/80 text-sm mt-1">Diskon hingga 50% untuk produk pilihan. Jangan sampai kehabisan!</p>
+            <Link
+              to="/products?has_promo=true"
+              className="shrink-0 bg-white text-red-600 font-bold px-6 py-3 rounded-full hover:bg-red-50 transition-colors inline-flex items-center gap-2 shadow-lg"
+            >
+              Belanja Promo <ArrowRight size={16} />
+            </Link>
           </div>
-          <Link
-            to="/products?is_featured=true"
-            className="shrink-0 bg-white text-red-600 font-bold px-6 py-3 rounded-full hover:bg-red-50 transition-colors inline-flex items-center gap-2 shadow-lg"
-          >
-            Belanja Promo <ArrowRight size={16} />
-          </Link>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Promo Products */}
       {promoProducts.length > 0 && (

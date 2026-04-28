@@ -28,6 +28,8 @@ export default function ProductsPage() {
   const maxPrice = searchParams.get('max_price') || ''
   const sortRaw = searchParams.get('sort') || 'created_at:DESC'
   const page = parseInt(searchParams.get('page') || '1')
+  const isFeatured = searchParams.get('is_featured') || ''
+  const hasPromo = searchParams.get('has_promo') || ''
   const [sortField, sortOrder] = sortRaw.split(':')
 
   const [localMin, setLocalMin] = useState(minPrice)
@@ -50,6 +52,8 @@ export default function ProductsPage() {
       if (brandId) params.brand_id = brandId
       if (minPrice) params.min_price = minPrice
       if (maxPrice) params.max_price = maxPrice
+      if (isFeatured) params.is_featured = true
+      if (hasPromo) params.has_promo = true
       params.sort = sortField
       params.order = sortOrder
       const { data } = await productsAPI.getAll(params)
@@ -60,7 +64,7 @@ export default function ProductsPage() {
     } finally {
       setLoading(false)
     }
-  }, [search, categoryId, brandId, minPrice, maxPrice, sortField, sortOrder, page])
+  }, [search, categoryId, brandId, minPrice, maxPrice, isFeatured, hasPromo, sortField, sortOrder, page])
 
   useEffect(() => { fetchProducts() }, [fetchProducts])
 
@@ -75,14 +79,14 @@ export default function ProductsPage() {
     setLocalMax('')
   }
 
-  const activeFiltersCount = [search, categoryId, brandId, minPrice, maxPrice].filter(Boolean).length
+  const activeFiltersCount = [search, categoryId, brandId, minPrice, maxPrice, isFeatured, hasPromo].filter(Boolean).length
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-6">
       {/* Page header */}
       <div className="mb-5">
         <h1 className="text-2xl font-extrabold text-gray-900">
-          {search ? `Hasil pencarian: "${search}"` : 'Semua Produk'}
+          {search ? `Hasil pencarian: "${search}"` : isFeatured ? 'Produk Unggulan' : hasPromo ? 'Produk Promo' : 'Semua Produk'}
         </h1>
         <p className="text-sm text-gray-500 mt-0.5">{meta.total} produk ditemukan</p>
       </div>
